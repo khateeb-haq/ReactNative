@@ -16,8 +16,8 @@ class App extends Component {
                 <NavigationContainer>
                     <this.BottomTab.Navigator screenOptions={{ tabBarIcon: () => null, tabBarHideOnKeyboard: true }}>
                         <this.BottomTab.Screen
-                        name={strings.NavigationStrings.photos}
-                        component={Photos} />
+                            name={strings.NavigationStrings.photos}
+                            component={Photos} />
                         <this.BottomTab.Screen
                             name={strings.NavigationStrings.employees}
                             component={Employees} />

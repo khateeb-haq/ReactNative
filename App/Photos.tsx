@@ -5,20 +5,18 @@ import { fetchPhotos } from './middleware'
 import { PhotoType } from './PhotoSlice'
 
 export default function ({ }) {
-
     const photos = useSelector<{ photos: PhotoType[] }, PhotoType[]>(s => s.photos)
     const [pageNumber, setPageNumber] = useState(1)
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(fetchPhotos(pageNumber, setLoading))
-    }, [pageNumber])
-    
+
+    useEffect(() => dispatch(fetchPhotos(pageNumber, setLoading, setPageNumber)), [])
+
     return (
         <View style={{ flex: 1 }}>
             <FlatList
                 onEndReachedThreshold={0.1}
-                onEndReached={() => { setLoading(true); setPageNumber((p) => p + 1) }}
+                onEndReached={() => { setLoading(true); dispatch(fetchPhotos(pageNumber, setLoading, setPageNumber)) }}
                 renderItem={({ item, index }) => {
                     const { url, title } = item
                     return (
